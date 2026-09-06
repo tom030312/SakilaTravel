@@ -1,4 +1,13 @@
-export const COMPANY_CONFIG = {
+export interface RouteItem {
+  id: number;
+  from: string;
+  to: string;
+  price: string;
+  schedule: string;
+  popular?: boolean;
+}
+
+export const CONFIG = {
   name: "Sakila Travel",
   tagline: "Travel Door-to-Door Nyaman & Terpercaya",
   phone: "6281234567890", // Ganti dengan nomor WhatsApp Anda
@@ -6,7 +15,14 @@ export const COMPANY_CONFIG = {
   description: "Layanan travel door-to-door antar kota dengan armada bersih, aman, dan pengemudi berpengalaman."
 };
 
-export const ROUTES = [
+// Fungsi membuka WhatsApp otomatis
+export const openWhatsApp = (message?: string) => {
+  const defaultMsg = `Halo ${CONFIG.name}, saya ingin memesan tiket travel.`;
+  const encodedMsg = encodeURIComponent(message || defaultMsg);
+  window.open(`https://wa.me/${CONFIG.phone}?text=${encodedMsg}`, "_blank");
+};
+
+export const ROUTES: RouteItem[] = [
   {
     id: 1,
     from: "Jakarta",
